@@ -2,6 +2,8 @@ import { defineConfig, normalizePath } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import autoprefixer from 'autoprefixer';
+import viteEslint from 'vite-plugin-eslint';
+import viteStylelint from 'vite-plugin-stylelint';
 
 const variablePath = normalizePath(path.resolve('./src/styles/variable.scss'));
 
@@ -9,7 +11,6 @@ const variablePath = normalizePath(path.resolve('./src/styles/variable.scss'));
 export default defineConfig({
   root: path.join(__dirname, 'src'),
   publicDir: path.join(__dirname, 'public'),
-  plugins: [react()],
   css: {
     preprocessorOptions: {
       scss: {
@@ -27,5 +28,12 @@ export default defineConfig({
         })
       ]
     }
-  }
+  },
+  plugins: [
+    react(),
+    viteEslint()
+    // viteStylelint({
+    //   exclude: '/windicss|node_modules/'
+    // })
+  ]
 });
